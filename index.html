@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hw-19</title>
+    <style>
+        .rect-wrapper {
+            width: 600px;
+            margin-top: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .rect {
+            width: 100px;
+            height: 100px;
+            border: 3px solid;
+        }
+        .blue {
+            background-color: slateblue;
+        }
+        .green {
+            background-color: limegreen;
+        }
+        .yellow {
+            background-color: goldenrod;
+        }
+    </style>
+</head>
+<body>
+    <div class="rect-wrapper">
+        <div class="rect"></div>
+        <div class="rect"></div>
+        <div class="rect"></div>
+        <div class="rect"></div>
+        <div class="rect"></div>
+    </div>
+    <script>
+        // задача №1
+        function changeColor (rect) {
+            if (rect.className === 'rect' || rect.classList.contains('yellow')) {
+                rect.classList.remove('yellow');
+                return rect.classList.add('blue');
+            }
+            if (rect.classList.contains('blue')) {
+                rect.classList.remove('blue');
+                return rect.classList.add('green');
+            } 
+            if (rect.classList.contains('green')) {
+                rect.classList.remove('green');
+                return rect.classList.add('yellow');
+            }
+        }
+        const rects = document.querySelector('.rect-wrapper')
+        rects.addEventListener('click', event => {
+            if (event.target.classList.contains('rect')) changeColor(event.target);
+            rects.append(event.target);
+        });
+
+        // задание №2
+        function toggleClass(teg, classN) {
+            let element = document.querySelector(`${teg}.${classN}`);
+            if (element) {
+                const elementArray = element.className.split(' ');
+                elementArray.splice(elementArray.findIndex(cls => cls === classN), 1);
+                element.className = elementArray.join(' ');
+            } else {
+                element = document.querySelector(teg);
+                element.className += ` ${classN}`;
+            }
+        }
+    </script>
+</body>
+</html>
